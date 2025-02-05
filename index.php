@@ -12,25 +12,39 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 if(isset($_POST['submit'])){
-    $id = $_POST['id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if($name == "" || empty($name)){
+    // Validate the name
+    if(empty($name)){
         header('location:index.php?message=Fill up the name!');
-    }
-    else{
-        $sql = "insert into users (id, name, email, password) value ('$id', '$name', '$email', '$password')";
-        $result = $conn->query($sql);
-        if(!$result){
-            die("failed".mysqli_error($conn));
-        }
-        else{
-            header('location:index.php?message=New user added!');
-        }
+        exit();
     }
 
+    // Check if user already exists
+    $checkEmail = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $checkEmail->bind_param('s', $email);
+    $checkEmail->execute();
+    $result = $checkEmail->get_result();
+
+    if ($result->num_rows > 0) {
+        // Email already exists
+        header('location:index.php?message=Email already exists!');
+        exit();
+    } else {
+        // Prepare an insert statement
+        $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+        $stmt->bind_param('sss', $name, $email, $password);
+
+        // Execute the statement
+        if (!$stmt->execute()) {
+            die("failed: " . $stmt->error);
+        } else {
+            header('location:index.php?message=New user added!');
+            exit();
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
