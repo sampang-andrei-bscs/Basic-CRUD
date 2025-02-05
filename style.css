@@ -41,3 +41,20 @@
     outline: none;
     transition: all 0.3s ease;
   }
+
+  input:focus {
+    border-color: #007BFF;
+    background-color: #f0f8ff;
+  }
+
+  button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to right, #007BFF, #00c6ff);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
