@@ -93,3 +93,18 @@
     background-color: #218838;
     transform: scale(1.05);
   }
+
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+  }
+
+  form input:last-of-type {
+    margin-bottom: 30px;
+  }
