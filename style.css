@@ -58,3 +58,28 @@
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
   }
+
+  button:hover {
+    background: linear-gradient(to right, #0056b3, #0084ff);
+    transform: scale(1.05);
+  }
+
+  button:active {
+    transform: scale(1);
+  }
+
+  .crud-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .crud-actions button {
+    width: 48%;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
