@@ -1,3 +1,38 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_crud";
+
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+if(isset($_POST['submit'])){
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if($name == "" || empty($name)){
+        header('location:index.php?message=Fill up the name!');
+    }
+    else{
+        $sql = "insert into users (id, name, email, password) value ('$id', '$name', '$email', '$password')";
+        $result = $conn->query($sql);
+        if(!$result){
+            die("failed".mysqli_error($conn));
+        }
+        else{
+            header('location:index.php?message=New user added!');
+        }
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
